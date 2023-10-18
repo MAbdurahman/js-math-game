@@ -16,6 +16,59 @@
     <title>js-math-game</title>
 </head>
 <body>
+<div class="game-container">
+    <!-- header -->
+    <header class="header">
+        <h1 class="heading-primary">Math Speed Game</h1>
+    </header>
+    <!-- splash screen -->
+    <section id="splash-page" class="card">
+        <form id="start-form">
+            <div class="selection-container">
+                <!-- 10 questions radio input -->
+                <div class="radio-container">
+                    <label for="value-10">10 Questions</label>
+                    <input type="radio" name="questions" value="10" id="value-10">
+                    <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value">0.0s</span>
+                        </span>
+                </div>
+                <!-- 25 questions radio input -->
+                <div class="radio-container">
+                    <label for="value-25">25 Questions</label>
+                    <input type="radio" name="questions" value="25" id="value-25">
+                    <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value">0.0s</span>
+                        </span>
+                </div>
+                <!-- 50 questions radio input -->
+                <div class="radio-container">
+                    <label for="value-50">50 Questions</label>
+                    <input type="radio" name="questions" value="50" id="value-50">
+                    <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value">0.0s</span>
+                        </span>
+                </div>
+                <!-- 99 questions radio input -->
+                <div class="radio-container">
+                    <label for="value-99">99 Questions</label>
+                    <input type="radio" name="questions" value="99" id="value-99">
+                    <span class="best-score">
+                            <span>Best Score</span>
+                            <span class="best-score-value">0.0s</span>
+                        </span>
+                </div>
+            </div>
+            <!-- Start Button -->
+            <div class="selection-footer">
+                <button class="start btn-default btn-fill" type="submit">Start Round</button>
+            </div>
+        </form>
+    </section>
+</div>
 
 <!--jQuery scripts -->
 <script src="./js/jquery-3.6.4.min.js"></script>
