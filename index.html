@@ -16,17 +16,21 @@
     <title>js-math-game</title>
 </head>
 <body>
+<!-- begin of preloader -->
+<div id="preloader">
+    <img src="./img/preloader.gif" alt="animated 3 cogs" id="preloader-gif"/>
+</div>
 <div class="game-container">
     <!-- header -->
     <header class="header">
         <h1 class="heading-primary">Math Speed Game</h1>
     </header>
     <!-- splash screen -->
-    <section id="splash-page" class="card">
+    <section id="splash-page" class="card" >
         <form id="start-form">
             <div class="selection-container">
                 <!-- 10 questions radio input -->
-                <div class="radio-container">
+                <div class="radio-container selected-label">
                     <label for="value-10">10 Questions</label>
                     <input type="radio" name="questions" value="10" id="value-10">
                     <span class="best-score">
@@ -68,6 +72,36 @@
             </div>
         </form>
     </section>
+    
+    <!-- Countdown Page -->
+    <div class="card" id="countdown-page" hidden >
+        <h1 class="countdown">3</h1>
+    </div>
+    
+    <!-- Game Page -->
+    <div class="card" id="game-page" hidden  >
+        <!-- Item Container -->
+        <div class="item-container"></div>
+        <!-- Right/Wrong Buttons -->
+        <div class="item-footer">
+            <button class="wrong btn-default btn-fill" onclick="select(false)">Wrong</button>
+            <button class="right btn-default btn-fill" onclick="select(true)">Right</button>
+        </div>
+    </div>
+    <!-- Score Page -->
+    <div class="card" id="score-page" hidden>
+        <!-- Score Container -->
+        <div class="score-container">
+            <h1 class="title">Your Time</h1>
+            <h1 class="final-time-text">3.5s</h1>
+            <h1 class="base-time">Base Time:&nbsp;&nbsp;<span class="base-time-text">2.5s</span></h1>
+            <h1 class="penalty-time">Penalty:&nbsp;&nbsp;<span class="penalty-time-text">+1.0s</span></h1>
+        </div>
+        <!-- Play Again Button -->
+        <div class="score-footer" >
+            <button class="play-again btn-default btn-fill" onclick="playAgain()" >Play Again</button>
+        </div>
+    </div>
 </div>
 
 <!--jQuery scripts -->
