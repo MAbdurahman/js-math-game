@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
     <!-- main styles -->
     <link rel="stylesheet" href="./css/main.css">
-    <title>js-math-game</title>
+    <title>Math Speed Game</title>
 </head>
 <body>
 <!-- begin of preloader -->
@@ -26,11 +26,11 @@
         <h1 class="heading-primary">Math Speed Game</h1>
     </header>
     <!-- splash screen -->
-    <section id="splash-page" class="card" >
+    <section id="splash-page" class="card">
         <form id="start-form">
             <div class="selection-container">
                 <!-- 10 questions radio input -->
-                <div class="radio-container selected-label">
+                <div class="radio-container">
                     <label for="value-10">10 Questions</label>
                     <input type="radio" name="questions" value="10" id="value-10">
                     <span class="best-score">
@@ -74,12 +74,12 @@
     </section>
     
     <!-- Countdown Page -->
-    <div class="card" id="countdown-page" hidden >
+    <div class="card" id="countdown-page" hidden>
         <h1 class="countdown">3</h1>
     </div>
     
     <!-- Game Page -->
-    <div class="card" id="game-page" hidden  >
+    <div class="card" id="game-page" hidden>
         <!-- Item Container -->
         <div class="item-container"></div>
         <!-- Right/Wrong Buttons -->
@@ -98,8 +98,8 @@
             <h1 class="penalty-time">Penalty:&nbsp;&nbsp;<span class="penalty-time-text">+1.0s</span></h1>
         </div>
         <!-- Play Again Button -->
-        <div class="score-footer" >
-            <button class="play-again btn-default btn-fill" onclick="playAgain()" >Play Again</button>
+        <div class="score-footer">
+            <button class="play-again btn-default btn-fill" onclick="playAgain()">Play Again</button>
         </div>
     </div>
 </div>
@@ -108,6 +108,8 @@
 <script src="./js/jquery-3.6.4.min.js"></script>
 <!-- sweetalert scripts-->
 <script src="./js/sweetalert.min.js"></script>
+<!-- shuffle scripts -->
+<script src="./js/shuffle.js"></script>
 <!--main scripts -->
 <script src="./js/main.js"></script>
 </body>
