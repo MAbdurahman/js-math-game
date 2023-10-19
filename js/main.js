@@ -91,13 +91,36 @@ $(function() {
     function selectQuestionAmount(e) {
         e.preventDefault();
         question_amount = getRadioValue();
-        console.log('question amount:', question_amount);
+
         if (question_amount) {
-            /*showCountdown();*/
-            console.log('start countdown...');
+            showCountdown();
+
         } else {
             swal('INVALID ENTRY!', 'Select A Number Of Questions To Be Answered.', 'error');
         }
+    }
+    /**
+     * @description - displays the countdown page, and counts down
+     */
+    function countdownStart() {
+        countdown.textContent = '3';
+        setTimeout(() => {
+            countdown.textContent = '2';
+        }, 1000);
+        setTimeout(() => {
+            countdown.textContent = '1';
+        }, 2000);
+        setTimeout(() => {
+            countdown.textContent = 'BEGIN!';
+        }, 3000);
+    }
+    // Navigate from Splash Page to CountdownPage to Game Page
+    function showCountdown() {
+        countdown_page.hidden = false;
+        splash_page.hidden = true;
+        countdownStart();
+        /*populateGamePage();
+        setTimeout(showGamePage, 4000);*/
     }
     function playAgain() {
         console.log('play again!');
