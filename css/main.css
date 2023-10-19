@@ -637,9 +637,14 @@ button:active {
     color: var(--clr-neutral-100);
 }
 
-.swal-button__loader div:hover {
+.swal-button__loader:hover div {
     color: var(--clr-assigned-primary-color);
     background: var(--clr-neutral-100);
+}
+button.swal-button.swal-button--confirm:hover {
+    color: var(--clr-assigned-primary-color);
+    background: var(--clr-neutral-100);
+    border: 2px solid var(--clr-assigned-primary-color);
 }
 
 .wrong,
