@@ -60,7 +60,9 @@ $(function() {
 
 
 
-    // Displays Game Page
+    /**
+     * @description - displays the game_page
+     */
     function displayGamePage() {
         game_page.hidden = false;
         countdown_page.hidden = true;
@@ -73,7 +75,6 @@ $(function() {
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
-
     /**
      * @description - create correct and incorrect random equations; and then shuffles
      * them
@@ -81,11 +82,11 @@ $(function() {
     function generateEquations() {
         // randomly choose the number of correct equations
         const correct_equations = getRandomInt(question_amount);
-        console.log('correct equations:', correct_equations);
+
         // set the number of  wrong equations
         const wrong_equations = question_amount - correct_equations;
-        console.log('wrong equations:', wrong_equations);
-        // loop through correct equations, multiply random numbers up to 9, and push to array
+
+        // loops through correct equations, multiply random numbers up to 9, and push to array
         for (let i = 0; i < correct_equations; i++) {
             first_number = getRandomInt(9);
             second_number = getRandomInt(9);
@@ -95,7 +96,7 @@ $(function() {
             equations_array.push(equation_object);
         }
 
-        // loop through wrong equation, alter the equation results, and push to array
+        // loops through wrong equation, alter the equation results, and push to array
         for (let i = 0; i < wrong_equations; i++) {
             first_number = getRandomInt(9) + 1;
             second_number = getRandomInt(9) + 1;
@@ -108,12 +109,8 @@ $(function() {
             equation_object = { value: equation, evaluated: 'false' };
             equations_array.push(equation_object);
         }
-
         shuffle(equations_array);
-        addEquationsToDOM();
-
     }
-
     /**
      * @description - creates element, add item class, add equation text, and append to the
      * div with the item-container class
@@ -131,6 +128,30 @@ $(function() {
             item.appendChild(equation_text);
             item_container.appendChild(item);
         });
+    }
+    /**
+     * @description - dynamically adds correct and incorrect equations to game_page
+     */
+    function populateGamePage() {
+        // Reset DOM, Set Blank Space Above
+        item_container.textContent = '';
+        // Spacer
+        const topSpacer = document.createElement('div');
+        topSpacer.classList.add('height-240');
+        // Selected Item
+        const selectedItem = document.createElement('div');
+        selectedItem.classList.add('selected-item');
+        // Append
+        item_container.append(topSpacer, selectedItem);
+
+        // Create Equations, Build Elements in DOM
+        generateEquations();
+        addEquationsToDOM();
+
+        // Set Blank Space Below
+        const bottomSpacer = document.createElement('div');
+        bottomSpacer.classList.add('height-500');
+        item_container.appendChild(bottomSpacer);
     }
 
     /**
@@ -190,21 +211,19 @@ $(function() {
             countdown.textContent = 'BEGIN!';
         }, 3000);
     }
-    // Navigate from Splash Page to CountdownPage to Game Page
+    /**
+     * @description - navigates from spash_page to countdown_page to game_page
+     */
     function showCountdown() {
         countdown_page.hidden = false;
         splash_page.hidden = true;
         countdownStart();
-        generateEquations();
-        /*populateGamePage();
-        setTimeout(showGamePage, 4000);*/
+        populateGamePage();
         setTimeout(displayGamePage, 4000);
     }
     function playAgain() {
         console.log('play again!');
     }
-
-
 
     //**************** add event listeners ****************//
     start_form.addEventListener('click', removeRadioButtonLabel);
