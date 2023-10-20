@@ -70,7 +70,8 @@ $(function() {
     }
 
     /**
-     * @description - create correct and incorrect random equations
+     * @description - create correct and incorrect random equations; and then shuffles
+     * them
      */
     function generateEquations() {
         // randomly choose the number of correct equations
@@ -91,8 +92,8 @@ $(function() {
 
         // loop through wrong equation, alter the equation results, and push to array
         for (let i = 0; i < wrong_equations; i++) {
-            first_number = getRandomInt(9);
-            second_number = getRandomInt(9);
+            first_number = getRandomInt(9) + 1;
+            second_number = getRandomInt(9) + 1;
             const equation_value = first_number * second_number;
             wrong_format[0] = `${first_number} x ${second_number + 1} = ${equation_value}`;
             wrong_format[1] = `${first_number} x ${second_number} = ${equation_value - 1}`;
@@ -102,9 +103,9 @@ $(function() {
             equation_object = { value: equation, evaluated: 'false' };
             equations_array.push(equation_object);
         }
-        console.log('equations_array', equations_array)
+
         shuffle(equations_array);
-        console.log('shuffled equations_array', equations_array)
+
     }
 
     /**
