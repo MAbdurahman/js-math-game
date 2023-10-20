@@ -515,7 +515,7 @@ label {
 }
 
 .selected-item {
-    background: var(--clr-assigned-primary-color);
+    background-color: var(--clr-primary-300);
     position: fixed;
     top: 443px;
     z-index: -1;
