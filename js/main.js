@@ -60,6 +60,11 @@ $(function() {
 
 
 
+    // Displays Game Page
+    function displayGamePage() {
+        game_page.hidden = false;
+        countdown_page.hidden = true;
+    }
     /**
      * @description - get a random number of to a specified amount
      * @param max - the specified amount
@@ -105,7 +110,27 @@ $(function() {
         }
 
         shuffle(equations_array);
+        addEquationsToDOM();
 
+    }
+
+    /**
+     * @description - creates element, add item class, add equation text, and append to the
+     * div with the item-container class
+     */
+    function addEquationsToDOM() {
+        equations_array.forEach((equation) => {
+
+            const item = document.createElement('div');
+            item.classList.add('item');
+
+            const equation_text = document.createElement('h1');
+            equation_text.classList.add('item-equation');
+            equation_text.textContent = equation.value;
+
+            item.appendChild(equation_text);
+            item_container.appendChild(item);
+        });
     }
 
     /**
@@ -173,6 +198,7 @@ $(function() {
         generateEquations();
         /*populateGamePage();
         setTimeout(showGamePage, 4000);*/
+        setTimeout(displayGamePage, 4000);
     }
     function playAgain() {
         console.log('play again!');

@@ -506,6 +506,9 @@ label {
     margin: 0 50px;
     user-select: none;
 }
+.item-equation {
+    font-family: var(--ff-secondary-font);
+}
 
 .finished > h1 {
     opacity: 0.5;
