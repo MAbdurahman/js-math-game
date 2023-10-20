@@ -57,6 +57,56 @@ $(function() {
 
 
     //**************** functions ****************//
+
+
+
+    /**
+     * @description - get a random number of to a specified amount
+     * @param max - the specified amount
+     * @returns {number} - the random number
+     */
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    /**
+     * @description - create correct and incorrect random equations
+     */
+    function generateEquations() {
+        // randomly choose the number of correct equations
+        const correct_equations = getRandomInt(question_amount);
+        console.log('correct equations:', correct_equations);
+        // set the number of  wrong equations
+        const wrong_equations = question_amount - correct_equations;
+        console.log('wrong equations:', wrong_equations);
+        // loop through correct equations, multiply random numbers up to 9, and push to array
+        for (let i = 0; i < correct_equations; i++) {
+            first_number = getRandomInt(9);
+            second_number = getRandomInt(9);
+            const equation_value = first_number * second_number;
+            const equation = `${first_number} x ${second_number} = ${equation_value}`;
+            equation_object = { value: equation, evaluated: 'true' };
+            equations_array.push(equation_object);
+        }
+
+        // loop through wrong equation, alter the equation results, and push to array
+        for (let i = 0; i < wrong_equations; i++) {
+            first_number = getRandomInt(9);
+            second_number = getRandomInt(9);
+            const equation_value = first_number * second_number;
+            wrong_format[0] = `${first_number} x ${second_number + 1} = ${equation_value}`;
+            wrong_format[1] = `${first_number} x ${second_number} = ${equation_value - 1}`;
+            wrong_format[2] = `${first_number + 1} x ${second_number} = ${equation_value}`;
+            const format_choice = getRandomInt(2);
+            const equation = wrong_format[format_choice];
+            equation_object = { value: equation, evaluated: 'false' };
+            equations_array.push(equation_object);
+        }
+        console.log('equations_array', equations_array)
+        shuffle(equations_array);
+        console.log('shuffled equations_array', equations_array)
+    }
+
     /**
      * @description - adds and/or removes the selected-label class from the div that contain
      * the radio-container class in the index.html
@@ -119,6 +169,7 @@ $(function() {
         countdown_page.hidden = false;
         splash_page.hidden = true;
         countdownStart();
+        generateEquations();
         /*populateGamePage();
         setTimeout(showGamePage, 4000);*/
     }
