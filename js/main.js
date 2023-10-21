@@ -3,14 +3,15 @@
 ===============================================*/
 $(window).on('load', function () {
     // makes sure that whole site is loaded
-    $('#preloader-gif, #preloader').fadeOut(5000, function () {});
+    $('#preloader-gif, #preloader').fadeOut(5000, function () {
+    });
 });
 
 /*=============================================
          js-math-game scripts
 ================================================*/
 
-$(function() {
+$(function () {
 
     //**************** variables ****************//
     const game_page = document.getElementById('game-page');
@@ -23,6 +24,9 @@ $(function() {
     const radioButton_inputs = document.querySelectorAll('input');
     const best_scores = document.querySelectorAll('.best-score-value');
 
+    const right_button = document.getElementById('right-button');
+    const wrong_button = document.getElementById('wrong-button');
+
     const countdown = document.querySelector('.countdown');
 // Game Page
     const item_container = document.querySelector('.item-container');
@@ -30,7 +34,8 @@ $(function() {
     const final_time_el = document.querySelector('.final-time');
     const base_time_el = document.querySelector('.base-time');
     const penalty_time_el = document.querySelector('.penalty-time');
-    const play_again_button = document.querySelector('.play-again');
+    /*    const play_again_button = document.querySelector('.play-again');*/
+
 
 // Equations
     let question_amount = 0;
@@ -58,7 +63,16 @@ $(function() {
 
     //**************** functions ****************//
 
+    function selectedAnswer(e) {
+        console.log('selectedAnswer function called', e.target.value);
+        console.log('player_guess_array: ', player_guess_array);
+        let selectedAnswer = e.target.value;
+        y_value += 80;
+        item_container.scroll(0, y_value);
 
+        return player_guess_array.push(selectedAnswer);
+
+    }
 
     /**
      * @description - displays the game_page
@@ -67,6 +81,7 @@ $(function() {
         game_page.hidden = false;
         countdown_page.hidden = true;
     }
+
     /**
      * @description - get a random number of to a specified amount
      * @param max - the specified amount
@@ -75,6 +90,7 @@ $(function() {
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
+
     /**
      * @description - create correct and incorrect random equations; and then shuffles
      * them
@@ -92,7 +108,7 @@ $(function() {
             second_number = getRandomInt(9);
             const equation_value = first_number * second_number;
             const equation = `${first_number} x ${second_number} = ${equation_value}`;
-            equation_object = { value: equation, evaluated: 'true' };
+            equation_object = {value: equation, evaluated: 'true'};
             equations_array.push(equation_object);
         }
 
@@ -106,11 +122,12 @@ $(function() {
             wrong_format[2] = `${first_number + 1} x ${second_number} = ${equation_value}`;
             const format_choice = getRandomInt(2);
             const equation = wrong_format[format_choice];
-            equation_object = { value: equation, evaluated: 'false' };
+            equation_object = {value: equation, evaluated: 'false'};
             equations_array.push(equation_object);
         }
         shuffle(equations_array);
     }
+
     /**
      * @description - creates element, add item class, add equation text, and append to the
      * div with the item-container class
@@ -129,6 +146,7 @@ $(function() {
             item_container.appendChild(item);
         });
     }
+
     /**
      * @description - dynamically adds correct and incorrect equations to game_page
      */
@@ -162,12 +180,12 @@ $(function() {
         radioButton_containers.forEach((radioButton) => {
             radioButton.classList.remove('selected-label');
 
-
             if (radioButton.children[1].checked) {
                 radioButton.classList.add('selected-label');
             }
         });
     }
+
     /**
      * @description - gets the value from the selected radioButton
      * @returns {*} - returns a number value of the radioButton input value
@@ -181,6 +199,7 @@ $(function() {
         });
         return radio_value;
     }
+
     /**
      * @description - determines the amount of questions to generate
      * @param e - submit event of the start button
@@ -196,6 +215,7 @@ $(function() {
             swal('INVALID ENTRY!', 'Select A Number Of Questions To Be Answered.', 'error');
         }
     }
+
     /**
      * @description - displays the countdown page, and counts down
      */
@@ -211,6 +231,7 @@ $(function() {
             countdown.textContent = 'BEGIN!';
         }, 3000);
     }
+
     /**
      * @description - navigates from spash_page to countdown_page to game_page
      */
@@ -221,6 +242,8 @@ $(function() {
         populateGamePage();
         setTimeout(displayGamePage, 4000);
     }
+
+
     function playAgain() {
         console.log('play again!');
     }
@@ -228,5 +251,9 @@ $(function() {
     //**************** add event listeners ****************//
     start_form.addEventListener('click', removeRadioButtonLabel);
     start_form.addEventListener('submit', selectQuestionAmount);
+
+    right_button.addEventListener('click', selectedAnswer);
+    wrong_button.addEventListener('click', selectedAnswer);
+
 
 })
