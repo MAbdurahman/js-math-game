@@ -63,15 +63,56 @@ $(function () {
 
     //**************** functions ****************//
 
+    //stops timer, processes results, and goes to score page
+    function checkTime() {
+        console.log('checkTime() called');
+
+        console.log('question_amount ', question_amount);
+        console.log('player_guess_array ', player_guess_array);
+        if (player_guess_array.length == question_amount) {
+
+            console.log('player_guess_array', player_guess_array);
+
+            console.log('time played: ', time_played);
+            clearInterval(timer);
+            // Check for wrong guess, add penaltyTime
+            equations_array.forEach((equation, index) => {
+                let is_correct = equation.evaluated === player_guess_array[index];
+                is_correct ? penalty_time += 0.0 : penalty_time += 0.5;
+            });
+            final_time = time_played + penalty_time;
+            console.log('time played: ', time_played, '\npenalty time: ', penalty_time, '\nfinal time: ', final_time);
+/*            scoresToDOM();*/
+
+        }
+    }
+
+    //adds a tenth of second to time played
+    function addTime() {
+        time_played += 0.1;
+        checkTime();
+    }
+
+    //starts time when game page is clicked
+    function startTimer() {
+        time_played = 0;
+        penalty_time = 0;
+        final_time = 0;
+        timer = setInterval(addTime, 100);
+        game_page.removeEventListener('click', startTimer);
+    }
+
+    /**
+     * @description - scrolls and stores player's answer in player_guess_array
+     * @param e - the e.target.value of the right or wrong button
+     * @returns {number} - returns player_guess_array with player's selected answer
+     */
     function selectedAnswer(e) {
-        console.log('selectedAnswer function called', e.target.value);
-        console.log('player_guess_array: ', player_guess_array);
         let selectedAnswer = e.target.value;
         y_value += 80;
         item_container.scroll(0, y_value);
 
         return player_guess_array.push(selectedAnswer);
-
     }
 
     /**
@@ -254,6 +295,8 @@ $(function () {
 
     right_button.addEventListener('click', selectedAnswer);
     wrong_button.addEventListener('click', selectedAnswer);
+
+    game_page.addEventListener('click', startTimer);
 
 
 })
