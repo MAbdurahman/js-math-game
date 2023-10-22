@@ -10,7 +10,6 @@ $(window).on('load', function () {
 /*=============================================
          js-math-game scripts
 ================================================*/
-
 $(function () {
 
     //**************** variables ****************//
@@ -65,7 +64,48 @@ $(function () {
     let y_value = 0;
 
     //**************** functions ****************//
+    function addBestScoresToDOM() {
+        best_scores.forEach((best_score, index) => {
+            const element = best_score;
+            element.textContent = `${best_score_array[index].bestScore}s`
+        });
+    }
+    /**
+     * @description - checks localStorage for mathSpeedGame, and set the best_score_array's
+     * values
+     */
+    function getLocalStorageBestScores() {
+        if(localStorage.getItem('mathSpeedGame')) {
+            best_score_array = JSON.parse(localStorage.mathSpeedGame);
 
+        } else {
+            best_score_array = [
+                { questions: 10, bestScore: final_time_display },
+                { questions: 25, bestScore: final_time_display },
+                { questions: 50, bestScore: final_time_display },
+                { questions: 99, bestScore: final_time_display }
+            ];
+            localStorage.setItem('mathSpeedGame', JSON.stringify(best_score_array));
+        }
+        addBestScoresToDOM();
+    }
+
+    /**
+     * @description - updates the best_score_array and localStorage
+     */
+    function updateBestScores() {
+        best_score_array.forEach((best_score, index) => {
+            if (question_amount == best_score.questions) {
+                const saveBestScore = Number(best_score_array[index].bestScore);
+
+                if (saveBestScore === 0 || saveBestScore > final_time) {
+                    best_score_array[index].bestScore = final_time_display
+                }
+            }
+        });
+        addBestScoresToDOM();
+        localStorage.setItem('mathSpeedGame', JSON.stringify(best_score_array));
+    }
     /**
      * @description - calls the method to display game results and hides the
      * game_page
@@ -73,7 +113,7 @@ $(function () {
     function displayScorePage() {
         setTimeout(() => {
             play_button.hidden = false;
-        }, 1500);
+        }, 2500);
         game_page.hidden = true;
         score_page.hidden = false;
 
@@ -91,6 +131,7 @@ $(function () {
         penalty_time_text.textContent = `Penalty Time: + ${penalty_time}s`;
         final_time_text.textContent = `Your Time: ${final_time_display}s`;
 
+        updateBestScores();
         item_container.scrollTo({ top: 0, behavior: 'instant' });
 
         displayScorePage();
@@ -326,4 +367,5 @@ $(function () {
     play_button.addEventListener('click', playAgain);
 
     //**************** get local storage values ****************//
+    getLocalStorageBestScores();
 })

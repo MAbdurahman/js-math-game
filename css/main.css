@@ -444,15 +444,19 @@ label {
 .best-score {
     position: relative;
     top: -100px;
+    left: 325px;
+    max-width: fit-content;
     /*left: 330px;*/
-    left: 360px;
+    /*left: 360px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     font-size: 18px;
     font-weight: var(--fw--font-weight-bold);
-    max-width: fit-content;
+    font-family: var(--ff-monospace-font);
+    font-weight: var(--fw--font-weight-bold);
+    letter-spacing: var(--ls-letter-spacing-100);
 }
 
 .best-score span {
