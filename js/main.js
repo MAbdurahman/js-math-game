@@ -329,9 +329,14 @@ $(function () {
     }
 
 
-    function playAgain(e) {
-        console.log('playAgain() called', e.target);
-        console.log(e.target.value);
+    function playAgain() {
+        game_page.addEventListener('click', startTimer);
+        score_page.hidden = true;
+        splash_page.hidden = false;
+        equations_array = [];
+        player_guess_array = [];
+        y_value = 0;
+
     }
 
     //**************** add event listeners ****************//
