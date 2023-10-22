@@ -24,17 +24,20 @@ $(function () {
     const radioButton_inputs = document.querySelectorAll('input');
     const best_scores = document.querySelectorAll('.best-score-value');
 
+    const play_button = document.getElementById('play-again-button');
     const right_button = document.getElementById('right-button');
     const wrong_button = document.getElementById('wrong-button');
+
 
     const countdown = document.querySelector('.countdown');
 // Game Page
     const item_container = document.querySelector('.item-container');
 // Score Page
-    const final_time_el = document.querySelector('.final-time');
-    const base_time_el = document.querySelector('.base-time');
-    const penalty_time_el = document.querySelector('.penalty-time');
+    const final_time_el = document.querySelector('.final-time-text');
+    const base_time_el = document.querySelector('.base-time-text');
+    const penalty_time_el = document.querySelector('.penalty-time-text');
     /*    const play_again_button = document.querySelector('.play-again');*/
+
 
 
 // Equations
@@ -63,17 +66,49 @@ $(function () {
 
     //**************** functions ****************//
 
-    //stops timer, processes results, and goes to score page
+    function displayScorePage() {
+        console.log('displayScorePage called');
+        /*play_button.hidden = false;*/
+        /*game_page.hidden = true;
+        score_page.hidden = false;
+        score_page.style ='display: block';*/
+        /*console.log(final_time_el.textContent=`${final_time}`);*/
+
+        game_page.hidden = true;
+        score_page.hidden = false;
+        score_page.style ='display: block';
+        console.log(`final_time_display: ${final_time_display}`)
+        console.log(base_time_el);
+        console.log(penalty_time_el);
+
+    }
+    function addScoreToDOM() {
+        final_time_display = final_time.toFixed(3);
+        console.log(`final_time_display: ${final_time_display}`)
+        base_time = time_played.toFixed(1);
+        penalty_time = penalty_time.toFixed(1);
+        base_time_el.textContent = `Base Time: ${base_time}s`;
+        penalty_time_el.textContent = `Penalty: + ${penalty_time}s`;
+        final_time_el.textContent = `Final Time: ${final_time_display}s`;
+
+/*        displayScorePage();*/
+    }
+
+    /**
+     * @description - stops timer, processes the results, and displays the
+     * score page
+     */
+
     function checkTime() {
-        console.log('checkTime() called');
+        /*console.log('checkTime() called');
 
         console.log('question_amount ', question_amount);
-        console.log('player_guess_array ', player_guess_array);
+        console.log('player_guess_array ', player_guess_array);*/
         if (player_guess_array.length == question_amount) {
 
-            console.log('player_guess_array', player_guess_array);
+            /*console.log('player_guess_array', player_guess_array);
 
-            console.log('time played: ', time_played);
+            console.log('time played: ', time_played);*/
             clearInterval(timer);
             // Check for wrong guess, add penaltyTime
             equations_array.forEach((equation, index) => {
@@ -82,7 +117,7 @@ $(function () {
             });
             final_time = time_played + penalty_time;
             console.log('time played: ', time_played, '\npenalty time: ', penalty_time, '\nfinal time: ', final_time);
-/*            scoresToDOM();*/
+            displayScorePage();
 
         }
     }
@@ -285,8 +320,9 @@ $(function () {
     }
 
 
-    function playAgain() {
-        console.log('play again!');
+    function playAgain(e) {
+        console.log('playAgain() called', e.target);
+        console.log(e.target.value);
     }
 
     //**************** add event listeners ****************//
@@ -295,6 +331,7 @@ $(function () {
 
     right_button.addEventListener('click', selectedAnswer);
     wrong_button.addEventListener('click', selectedAnswer);
+    play_button.addEventListener('click', playAgain);
 
     game_page.addEventListener('click', startTimer);
 
