@@ -40,9 +40,6 @@ $(function () {
     const base_time_text = document.querySelector('#base-time-text');
     const final_time_text = document.querySelector('#final-time-text');
     const penalty_time_text = document.querySelector('#penalty-time-text');
-    /*    const play_again_button = document.querySelector('.play-again');*/
-
-
 
 // Equations
     let question_amount = 0;
@@ -67,27 +64,24 @@ $(function () {
 // Scroll
     let y_value = 0;
 
-
     //**************** functions ****************//
 
+    /**
+     * @description - calls the method to display game results and hides the
+     * game_page
+     */
     function displayScorePage() {
-        console.log('displayScorePage called');
-        /*play_button.hidden = false;*/
-        /*game_page.hidden = true;
-        score_page.hidden = false;
-        score_page.style ='display: block';*/
-        /*console.log(final_time_el.textContent=`${final_time}`);*/
-
-
+        setTimeout(() => {
+            play_button.hidden = false;
+        }, 1500);
         game_page.hidden = true;
         score_page.hidden = false;
 
 
-        console.log(base_time_el);
-        console.log(penalty_time_el);
-        console.log(final_time_el)
-
     }
+    /**
+     * @description - formats the times and displays them to DOM
+     */
     function addScoreToDOM() {
         base_time = time_played.toFixed(1);
         penalty_time = penalty_time.toFixed(1);
@@ -101,22 +95,14 @@ $(function () {
 
         displayScorePage();
     }
-
     /**
-     * @description - stops timer, processes the results, and displays the
-     * score page
+     * @description - stops timer, processes the results, and calls the addScoreToDOM
+     * method
+     *
      */
-
     function checkTime() {
-        /*console.log('checkTime() called');
-
-        console.log('question_amount ', question_amount);
-        console.log('player_guess_array ', player_guess_array);*/
         if (player_guess_array.length == question_amount) {
 
-            /*console.log('player_guess_array', player_guess_array);
-
-            console.log('time played: ', time_played);*/
             clearInterval(timer);
             // Check for wrong guess, add penaltyTime
             equations_array.forEach((equation, index) => {
@@ -124,20 +110,21 @@ $(function () {
                 is_correct ? penalty_time += 0.0 : penalty_time += 0.5;
             });
             final_time = time_played + penalty_time;
-            console.log('time played: ', time_played, '\npenalty time: ', penalty_time, '\nfinal time: ', final_time);
-            /*displayScorePage();*/
+
             addScoreToDOM();
 
         }
     }
-
-    //adds a tenth of second to time played
+    /**
+     * @description - adds a tenth(0.10) of a second to time played
+     */
     function addTime() {
         time_played += 0.1;
         checkTime();
     }
-
-    //starts time when game page is clicked
+    /**
+     * @description - starts the time, when game_page is clicked
+     */
     function startTimer() {
         time_played = 0;
         penalty_time = 0;
@@ -145,7 +132,6 @@ $(function () {
         timer = setInterval(addTime, 100);
         game_page.removeEventListener('click', startTimer);
     }
-
     /**
      * @description - scrolls and stores player's answer in player_guess_array
      * @param e - the e.target.value of the right or wrong button
@@ -158,15 +144,13 @@ $(function () {
 
         return player_guess_array.push(selectedAnswer);
     }
-
     /**
-     * @description - displays the game_page
+     * @description - displays the game_page and hides countdown_page
      */
     function displayGamePage() {
         game_page.hidden = false;
         countdown_page.hidden = true;
     }
-
     /**
      * @description - get a random number of to a specified amount
      * @param max - the specified amount
@@ -175,7 +159,6 @@ $(function () {
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
-
     /**
      * @description - create correct and incorrect random equations; and then shuffles
      * them
@@ -212,7 +195,6 @@ $(function () {
         }
         shuffle(equations_array);
     }
-
     /**
      * @description - creates element, add item class, add equation text, and append to the
      * div with the item-container class
@@ -231,7 +213,6 @@ $(function () {
             item_container.appendChild(item);
         });
     }
-
     /**
      * @description - dynamically adds correct and incorrect equations to game_page
      */
@@ -256,7 +237,6 @@ $(function () {
         bottomSpacer.classList.add('height-500');
         item_container.appendChild(bottomSpacer);
     }
-
     /**
      * @description - adds and/or removes the selected-label class from the div that contain
      * the radio-container class in the index.html
@@ -270,7 +250,6 @@ $(function () {
             }
         });
     }
-
     /**
      * @description - gets the value from the selected radioButton
      * @returns {*} - returns a number value of the radioButton input value
@@ -284,7 +263,6 @@ $(function () {
         });
         return radio_value;
     }
-
     /**
      * @description - determines the amount of questions to generate
      * @param e - submit event of the start button
@@ -300,9 +278,8 @@ $(function () {
             swal('INVALID ENTRY!', 'Select A Number Of Questions To Be Answered.', 'error');
         }
     }
-
     /**
-     * @description - displays the countdown page, and counts down
+     * @description - displays the countdown page, and counts down starting at three
      */
     function countdownStart() {
         countdown.textContent = '3';
@@ -316,7 +293,6 @@ $(function () {
             countdown.textContent = 'BEGIN!';
         }, 3000);
     }
-
     /**
      * @description - navigates from spash_page to countdown_page to game_page
      */
@@ -327,27 +303,27 @@ $(function () {
         populateGamePage();
         setTimeout(displayGamePage, 4000);
     }
-
-
+    /**
+     * @description - resets the game_page, splash_page, and score_page. Also, resets
+     * the variable equations_array, player_guess_array, and y_value
+     */
     function playAgain() {
         game_page.addEventListener('click', startTimer);
         score_page.hidden = true;
         splash_page.hidden = false;
+        play_button.hidden = true;
         equations_array = [];
         player_guess_array = [];
         y_value = 0;
 
     }
-
     //**************** add event listeners ****************//
     start_form.addEventListener('click', removeRadioButtonLabel);
     start_form.addEventListener('submit', selectQuestionAmount);
-
+    game_page.addEventListener('click', startTimer);
     right_button.addEventListener('click', selectedAnswer);
     wrong_button.addEventListener('click', selectedAnswer);
     play_button.addEventListener('click', playAgain);
 
-    game_page.addEventListener('click', startTimer);
-
-
+    //**************** get local storage values ****************//
 })

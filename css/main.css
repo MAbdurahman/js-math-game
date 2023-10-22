@@ -350,8 +350,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--clr-primary-800);
-    /*background-image: radial-gradient(circle, var(--clr-primary-800) 28%, var(--clr-primary-800) 100%);*/
+    background-image: radial-gradient(circle, var(--clr-primary-600) 28%, var(--clr-primary-800) 100%);
     display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
@@ -373,36 +372,32 @@ img {
 }
 
 .game-container {
+    position: relative;
+    width: 530px;
+    height: 750px;
+    margin-top: 100px;
     border: 1px solid var(--clr-assigned-border-color);
     border-radius: var(--br-border-radius-400);
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
-    width: 530px;
-    height: 750px;
-    position: relative;
     background: rgba(255, 255, 255, 0.5);
     user-select: none;
-    margin-top: 100px;
-    /*display: flex;
-    flex-direction: column;
-    align-self: center;*/
+
 }
 
 .header {
-    background: var(--clr-assigned-primary-color);
-    color: white;
-    font-family: var(--ff-primary-font);
-    font-weight: var(--fw--font-weight-bold);
-    font-size: 24px;
-    letter-spacing: 2px;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: var(--ff-primary-font);
+    font-weight: var(--fw--font-weight-bold);
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: white;
+    background: var(--clr-assigned-primary-color);
     border-top-right-radius: var(--br-border-radius-400);
     border-top-left-radius: var(--br-border-radius-400);
 }
-
-
 
 .card {
     margin: 5px auto 10px;
@@ -546,9 +541,8 @@ label {
 
 }
 
-
 /*=============================================
-        button
+        button styles
 ================================================*/
 .btn-default {
     position: relative;
@@ -683,7 +677,9 @@ button.swal-button.swal-button--confirm:hover {
     background: var(--clr-primary-800);
 }
 
-/* Countdown Page ---------------------- */
+/*=============================================
+          countdown page styles
+================================================*/
 .countdown {
     margin-top: 45%;
     font-size: 48px;
@@ -694,7 +690,9 @@ button.swal-button.swal-button--confirm:hover {
     cursor: pointer;
 }
 
-/* Score Page ------------------------- */
+/*=============================================
+          score_page styles
+================================================*/
 .score-container {
     height: 600px;
     display: flex;
@@ -703,28 +701,10 @@ button.swal-button.swal-button--confirm:hover {
     align-items: center;
 }
 
-/*.score-footer {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: -30px;
-}*/
 .score-container-results {
     position: relative;
     height: fit-content(600px);
 }
-/*.score-footer {
-    width: 100%;
-    height: 90px;
-    background: var(--clr-primary-800);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    display: none;
-}*/
 
 .score-footer {
     position: relative;
@@ -739,32 +719,8 @@ button.swal-button.swal-button--confirm:hover {
 }
 
 .title {
-    font-size: 45px;
-    /*font-family: var(--ff-secondary-font);*/
+    font-size: 44px;
 }
-
-/*.final-time {
-    font-size: 100px;
-    font-family: var(--ff-secondary-font);
-    margin: 0;
-    color: var(--clr-semantic-s-400);
-}
-
-.base-time {
-    margin-top: 100px;
-    margin-bottom: 0;
-    font-family: var(--ff-primary-font);
-}
-
-.penalty-time {
-    font-family: var(--ff-primary-font);
-    color: var(--clr-semantic-a-400);
-}
-
-.base-time,
-.penalty-time {
-    font-size: 32px;
-}*/
 
 .final-time-text,
 .base-time-text,
