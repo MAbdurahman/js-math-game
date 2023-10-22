@@ -68,7 +68,7 @@
             </div>
             <!-- Start Button -->
             <div class="selection-footer">
-                <button class="start btn-default btn-fill" type="submit">Start Round</button>
+                <button class="start btn-default btn-fill" type="submit">Start Game</button>
             </div>
         </form>
     </section>
@@ -89,13 +89,15 @@
         </div>
     </div>
     <!-- Score Page -->
-    <div class="card" id="score-page" hidden>
+    <div class="card" id="score-page" hidden >
         <!-- Score Container -->
         <div class="score-container">
-            <h1 class="title">Your Time</h1>
-            <h1 class="final-time-text"></h1>
-            <h1 class="base-time-text"></h1>
-            <h1 class="penalty-time-text"></h1>
+            <h2 class="title">Game Results</h2>
+            <section class="score-container-results">
+                <h3 id="base-time-text" class="base-time-text"></h3>
+                <h3 id="penalty-time-text" class="penalty-time-text"></h3>
+                <h3 id="final-time-text" class="final-time-text"></h3>
+            </section>
         </div>
         <!-- Play Again Button -->
         <div class="score-footer">

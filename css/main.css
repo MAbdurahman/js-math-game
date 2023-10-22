@@ -350,7 +350,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--clr-assigned-primary-color);
+    background-color: var(--clr-primary-800);
     /*background-image: radial-gradient(circle, var(--clr-primary-800) 28%, var(--clr-primary-800) 100%);*/
     display: -webkit-box;
     display: flex;
@@ -703,16 +703,19 @@ button.swal-button.swal-button--confirm:hover {
     align-items: center;
 }
 
-.score-footer {
+/*.score-footer {
     width: 100%;
     height: 90px;
     display: flex;
     justify-content: center;
     position: relative;
     top: -30px;
+}*/
+.score-container-results {
+    position: relative;
+    height: fit-content(600px);
 }
-
-.score-footer {
+/*.score-footer {
     width: 100%;
     height: 90px;
     background: var(--clr-primary-800);
@@ -721,6 +724,18 @@ button.swal-button.swal-button--confirm:hover {
     align-items: center;
     position: relative;
     display: none;
+}*/
+
+.score-footer {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    background: var(--clr-primary-800);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: var(--br-border-radius-400);
+    border-bottom-right-radius: var(--br-border-radius-400);
 }
 
 .title {
@@ -728,7 +743,7 @@ button.swal-button.swal-button--confirm:hover {
     /*font-family: var(--ff-secondary-font);*/
 }
 
-.final-time {
+/*.final-time {
     font-size: 100px;
     font-family: var(--ff-secondary-font);
     margin: 0;
@@ -749,20 +764,28 @@ button.swal-button.swal-button--confirm:hover {
 .base-time,
 .penalty-time {
     font-size: 32px;
-}
+}*/
+
 .final-time-text,
 .base-time-text,
 .penalty-time-text {
+    margin: 0 auto 8px;
     font-family: var(--ff-secondary-font);
-    color: var(--clr-assigned-text-dark);
-
+    font-size: 40px;
 }
-.final-time-text {
-    font-size: 100px;
 
-    margin: 0;
+.base-time-text {
+    color: var(--clr-semantic-i-300);
+}
+
+.penalty-time-text {
+    color: var(--clr-semantic-a-400);
+}
+
+.final-time-text {
     color: var(--clr-semantic-s-400);
 }
+
 /* Media Query: Laptop */
 @media screen and (max-width: 1800px) {
     .game-container {
